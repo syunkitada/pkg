@@ -8,7 +8,7 @@ TOP_DIR=/tmp/rpmbuild
 SRC_DIR=$TOP_DIR/SOURCES
 mkdir -p $SRC_DIR
 
-test -e "$SRC_DIR/qemu-${VERSION}.tar.xz" || wget -P $SRC_DIR "https://download.qemu.org/qemu-${VERSION}.tar.xz"
+test -e "$SRC_DIR/qemu-${VERSION}.tar.xz" || wget -P "$SRC_DIR" "https://download.qemu.org/qemu-${VERSION}.tar.xz"
 
 cd $BASE_DIR
 rpmbuild --bb "${VERSION}-rpm.spec" \
@@ -17,4 +17,4 @@ rpmbuild --bb "${VERSION}-rpm.spec" \
 	--define "version ${VERSION}" \
 	--define "release ${RELEASE}"
 
-cp /tmp/pkg/rpm/RPMS/x86_64/* /opt/pkg/rpm/rocky/8/x86_64
+cp /tmp/rpmbuild/RPMS/x86_64/* /opt/pkg/rpm/rocky/8/x86_64
